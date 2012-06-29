@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum WEAPON_SWITCH
 {
@@ -12,6 +13,32 @@ public class GunInterface : MonoBehaviour
     public Transform m_pBaseShoot = null;
     public float m_BaseForce;
     protected Transform m_pCurrentShoot = null;
+
+    // Resources
+    List<IResource> m_lOnShootResources = null;
+    List<IResource> m_lOnActivateResources = null;
+
+    // Add resources to the lists
+    public GunInterface AddResource(IResource pResource)
+    {
+        // use on shoot
+        if(pResource.m_ExhaustionState == EXHAUSTION_STATE.ON_SHOOT)
+        {
+            if (m_lOnShootResources == null)
+                m_lOnShootResources = new List<IResource>();
+            m_lOnShootResources.Add(pResource);
+        }
+        else
+        {
+            // use on activation
+            if (m_lOnActivateResources == null)
+                m_lOnActivateResources = new List<IResource>();
+            m_lOnActivateResources.Add(pResource);
+        }
+
+        return this;
+    }
+
 
     // Reset shoot
     public void ResetShoot()
