@@ -14,6 +14,7 @@ public class HealManager : MonoBehaviour {
 	public bool intrigger = false;
 	public bool overTime;
 	public bool hit;
+	public float damage;
 	public float damageOT = 5;
 	public float damageHit = 30;
 	
@@ -30,41 +31,25 @@ public class HealManager : MonoBehaviour {
 		if (currentHealth < maxHealth){
 			if (!intrigger){
 				currentHealth = currentHealth + healthRegenRate;
-			}
-			
-			
+			}	
 		}
-		
-		
-		
-	
-		
-		
-		
 	
 	}
 	
-	void OnTriggerStay(Collider other) {
+	public void ApplyDamage(float damage){
 		
-		if(other.gameObject.tag == "DamageOT" && intrigger){
-			currentHealth = currentHealth - damageOT;
-			Debug.Log("currhealth" + currentHealth);
-			
-			
+		currentHealth = currentHealth - damage;
+		Debug.Log("healt" + currentHealth);
+		if (currentHealth <= 0){
+			Destroy(gameObject);	
 		}
-		intrigger = true;
-        //currentHealth -=1;
 		
-    }
+	}
 	
-	  void OnTriggerExit(Collider other) {
-        intrigger = false;
-    }
+
 	
-	 void OnTriggerEnter(Collider other) {
-       	if(other.gameObject.tag == "DamageHit"){
-			currentHealth = currentHealth - damageHit;
+	
 		
-		}
-    }
+		
 }
+
