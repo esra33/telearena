@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum WEAPON_SWITCH
 {
@@ -12,6 +13,32 @@ public class GunInterface : MonoBehaviour
     public Transform m_pBaseShoot = null;
     public float m_BaseForce;
     protected Transform m_pCurrentShoot = null;
+
+    // Resources
+    List<IResource> m_lOnShootResources = null;
+    List<IResource> m_lOnActivateResources = null;
+
+    // Add resources to the lists
+    public GunInterface AddResource(IResource pResource)
+    {
+        // use on shoot
+        if(pResource.m_ExhaustionState == EXHAUSTION_STATE.ON_SHOOT)
+        {
+            if (m_lOnShootResources == null)
+                m_lOnShootResources = new List<IResource>();
+            m_lOnShootResources.Add(pResource);
+        }
+        else
+        {
+            // use on activation
+            if (m_lOnActivateResources == null)
+                m_lOnActivateResources = new List<IResource>();
+            m_lOnActivateResources.Add(pResource);
+        }
+
+        return this;
+    }
+
 
     // Reset shoot
     public void ResetShoot()
@@ -51,6 +78,15 @@ public class GunInterface : MonoBehaviour
         bool bShoot = true;
         bShoot = bShoot && BaseCanShoot();
         bShoot = bShoot && SpecialCaseShoot();
+
+        if (m_lOnShootResources == null)
+            return bShoot;
+        
+        foreach(IResource res in m_lOnShootResources)
+        {
+            bShoot = bShoot && res.ResourceReady();
+        }
+
         return bShoot;
     }
 
@@ -83,6 +119,13 @@ public class GunInterface : MonoBehaviour
 
     protected virtual void BaseShoot()
     {
+        // Use the shoot resources
+        if (m_lOnShootResources != null)
+        {
+            foreach (IResource res in m_lOnShootResources)
+                res.UseResource();
+        }
+
         // Common shooting mechanic
         if (m_pCurrentShoot)
             Destroy(m_pCurrentShoot.gameObject);
@@ -99,6 +142,15 @@ public class GunInterface : MonoBehaviour
         bool bActivate = true;
         bActivate = bActivate && BaseCanActivate();
         bActivate = bActivate && SpecialCaseActivate();
+
+        if (m_lOnActivateResources == null)
+            return bActivate;
+
+        foreach (IResource res in m_lOnActivateResources)
+        {
+            bActivate = bActivate && res.ResourceReady();
+        }
+
         return bActivate;
     }
 
@@ -116,6 +168,13 @@ public class GunInterface : MonoBehaviour
     // Activate the system
     protected void Activate()
     {
+        // Use the shoot resources
+        if (m_lOnActivateResources != null)
+        {
+            foreach (IResource res in m_lOnActivateResources)
+                res.UseResource();
+        }
+
         ActivateShoot();
         Destroy(m_pCurrentShoot.gameObject);
         return;
