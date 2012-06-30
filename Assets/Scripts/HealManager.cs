@@ -12,12 +12,8 @@ public class HealManager : MonoBehaviour {
 	public float healthRegenRate = 0.1f;
 	public float currentHealth = 100;
 	public bool intrigger = false;
-	public bool overTime;
-	public bool hit;
-	public float damage;
-	public float damageOT = 5;
-	public float damageHit = 30;
 	
+
 	// Use this for initialization
 	void Start () {
 	
