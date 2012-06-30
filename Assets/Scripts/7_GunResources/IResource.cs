@@ -39,7 +39,7 @@ public abstract class IResource : MonoBehaviour {
 
     public EXHAUSTION_STATE m_ExhaustionState = EXHAUSTION_STATE.ON_SHOOT;
 
-    GUN_SYSTEM m_RelatedGunSystem;
+    protected GUN_SYSTEM m_RelatedGunSystem;
 
     // Accessor
     public GUN_SYSTEM gunSystem
@@ -47,7 +47,7 @@ public abstract class IResource : MonoBehaviour {
         get { return m_RelatedGunSystem; }
     }
 
-    RESOURCE_SYSTEM m_ResourceSystem;
+    protected RESOURCE_SYSTEM m_ResourceSystem;
 
     // Accessor
     public RESOURCE_SYSTEM resourceSystem

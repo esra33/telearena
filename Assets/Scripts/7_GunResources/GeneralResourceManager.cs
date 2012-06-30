@@ -28,4 +28,19 @@ public static class GeneralResourceManager {
             }
         }
     }
+
+    // clear the current list
+    public static void ClearList()
+    {
+        m_lWorldResources.Clear();
+    }
+}
+
+// Use this class as a proxy, may not be needed though
+public class ResourceSceneInterface : MonoBehaviour
+{
+    void OnLevelWasLoaded(int level)
+    {
+        GeneralResourceManager.ClearList();
+    }
 }
