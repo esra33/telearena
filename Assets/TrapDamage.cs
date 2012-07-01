@@ -3,9 +3,10 @@ using System.Collections;
 
 public class TrapDamage : MonoBehaviour {
 	
-	public bool damageOverTime;
-	public bool damageOnHit;
-	public float damage;
+	public bool damageOverTime; //type of trap
+	public bool damageOnHit;   // type of trap
+	public float damageOT;    // amount of damage
+	public float damageHit; // amount of damage
 	
 
 	// Use this for initialization
@@ -27,7 +28,7 @@ public class TrapDamage : MonoBehaviour {
 		
 		if(damageOverTime || damageOnHit){
 		
-			other.gameObject.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+			other.gameObject.SendMessage("ApplyDamage", damageOT, SendMessageOptions.DontRequireReceiver);
 			
 		}
 	}
@@ -38,7 +39,7 @@ public class TrapDamage : MonoBehaviour {
 		}
 		
 		if(damageOverTime){
-			other.gameObject.SendMessage("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+			other.gameObject.SendMessage("ApplyDamage", damageOT, SendMessageOptions.DontRequireReceiver);
 		
 		}
 		
