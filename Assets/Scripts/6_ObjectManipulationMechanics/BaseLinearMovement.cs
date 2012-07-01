@@ -18,15 +18,12 @@ public class BaseLinearMovement : MonoBehaviour {
 
     // strength of the force
     public float m_ForceStrenght = 10.0f;
-    public LayerMask m_LayersToIgnore = 0;
+    public LayerMask m_LayersToIgnore;
     eApplicationMoment m_ApplicationMoment = eApplicationMoment.None;
     public eApplicationMoment[] m_ApplicationMoments = { eApplicationMoment.None, eApplicationMoment.None };
 
     void Start()
     {
-        // invert the layers
-        m_LayersToIgnore = ~m_LayersToIgnore;
-
         if (m_ApplicationMoments.Length == 1)
             m_ApplicationMoment = m_ApplicationMoments[0];
         else if (m_ApplicationMoments.Length > 1)
@@ -57,7 +54,7 @@ public class BaseLinearMovement : MonoBehaviour {
             return null;
 
         // test for ignore layers
-        if ((other.gameObject.layer & m_LayersToIgnore) == 0)
+        if (((1 << other.gameObject.layer) & m_LayersToIgnore.value) != 0)
             return null;
 
         return other.gameObject;

@@ -9,11 +9,6 @@ public class LastCollitionBeacon : MonoBehaviour {
     // Layers to ignore
     LayerMask m_LayersToIgnore = 0;
 
-    public LayerMask layersToIgnore
-    {
-        set { m_LayersToIgnore = value; }
-    }
-    
     // Elements to take into account to determine the position the platform will occupy 
     Vector3 m_vLastValidSpot;
     Vector3 m_vLastValidNormal;
@@ -21,14 +16,20 @@ public class LastCollitionBeacon : MonoBehaviour {
     // Found a successful spot
     bool m_bSuccess = false;
 
+    public void SetLayersToIgnore(LayerMask mask)
+    {
+        m_LayersToIgnore = mask;
+    }
+
     void OnCollisionEnter(Collision other)
     {
         float currAngle = 180;
         float evalAngle;
         foreach(ContactPoint cp in other.contacts)
         {
+            // The mask doesn't come inverted
             evalAngle = Vector3.Angle(Vector3.Normalize(cp.point - transform.position), rigidbody.velocity.normalized);
-            if ((cp.otherCollider.gameObject.layer & m_LayersToIgnore) == cp.otherCollider.gameObject.layer && evalAngle < currAngle)
+            if ((( 1 << cp.otherCollider.gameObject.layer) & m_LayersToIgnore.value) == 0 && evalAngle < currAngle)
             {
                 m_bSuccess = true;
                 currAngle = evalAngle;

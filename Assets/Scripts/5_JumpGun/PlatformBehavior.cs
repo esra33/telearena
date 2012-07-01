@@ -37,9 +37,9 @@ public class PlatformBehavior : MonoBehaviour {
 
            foreach (ContactPoint cp in other.contacts)
            {
-               // Mask already comes inverted
+               // The mask doesn't come inverted so only accept if the mask fails
                evalAngle = Vector3.Angle(Vector3.Normalize(cp.point - transform.position), rigidbody.velocity.normalized);
-               if ((cp.otherCollider.gameObject.layer & m_LayersToIgnore) == cp.otherCollider.gameObject.layer && evalAngle < currAngle)
+               if (((1 << cp.otherCollider.gameObject.layer) & m_LayersToIgnore.value) == 0 && evalAngle < currAngle)
                {
                    currAngle = evalAngle;
                    transform.position = cp.point;

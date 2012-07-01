@@ -4,6 +4,7 @@ using System.Collections;
 public class JumpPlatformGun : GenericTeleportGun{
 
     public GameObject m_pCurrentPlatformGO = null;
+    public LayerMask m_BeaconLayersToIgnore = 0;
     bool m_bActivate;
     float []m_baseOffsets;
     // What happens when I activate the shoot
@@ -49,7 +50,7 @@ public class JumpPlatformGun : GenericTeleportGun{
         m_baseOffsets = new float[3]{ objectiveCollider.x, objectiveCollider.y, objectiveCollider.z };
         OrganiceOffsets();
         m_pCurrentPlatformGO.layer = LayerMask.NameToLayer("Teleportable");
-        m_pCurrentPlatformGO.SendMessage("SetLayersToIgnore", m_ExcludedLayers, SendMessageOptions.DontRequireReceiver);
+        m_pCurrentPlatformGO.SendMessage("SetLayersToIgnore", m_BeaconLayersToIgnore, SendMessageOptions.DontRequireReceiver);
         return true;
     }
 
@@ -66,5 +67,12 @@ public class JumpPlatformGun : GenericTeleportGun{
         bool bReturn = base.SpecialCaseActivate();
         m_pCurrentPlatformGO.layer = LayerMask.NameToLayer("Teleportable");
         return bReturn;
+    }
+
+    // Special shoot behavior
+    protected override void SpecialShoot()
+    {
+        m_pCurrentShoot.gameObject.SendMessage("SetLayersToIgnore", m_BeaconLayersToIgnore, SendMessageOptions.DontRequireReceiver);
+        return;
     }
 }
