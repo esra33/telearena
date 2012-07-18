@@ -195,6 +195,10 @@ private function UpdateFunction () {
 	// Moving platform support
 	var moveDistance : Vector3 = Vector3.zero;
 	if (MoveWithPlatform()) {
+	
+	    //Debug.Log(((movingPlatform.activePlatform.gameObject.layer & ~(movingPlatform.layersToIgnore.value)) == 0));
+	    //Debug.Log(movingPlatform.activePlatform.gameObject.name);
+	
 		var newGlobalPoint : Vector3 = movingPlatform.activePlatform.TransformPoint(movingPlatform.activeLocalPoint);
 		moveDistance = (newGlobalPoint - movingPlatform.activeGlobalPoint);
 		if (moveDistance != Vector3.zero)
@@ -275,8 +279,9 @@ private function UpdateFunction () {
 		grounded = false;
 		
 		// Apply inertia from platform
-		if (movingPlatform.enabled &&
-			(movingPlatform.movementTransfer == MovementTransferOnJump.InitTransfer ||
+		if ((movingPlatform.activePlatform != null && movingPlatform.activePlatform.gameObject.layer & ~(movingPlatform.layersToIgnore.value)) == 0 &&
+		    movingPlatform.enabled &&
+			(movingPlatform.movementTransfer == MovementTransferOnJump.InitTransfer ||      // <-- here
 			movingPlatform.movementTransfer == MovementTransferOnJump.PermaTransfer)
 		) {
 			movement.frameVelocity = movingPlatform.platformVelocity;
@@ -494,7 +499,8 @@ private function SubtractNewPlatformVelocity () {
 }
 
 private function MoveWithPlatform () : boolean {
-	return (
+    
+    return (
 		movingPlatform.enabled
 		&& (grounded || movingPlatform.movementTransfer == MovementTransferOnJump.PermaLocked)
 		&& movingPlatform.activePlatform != null
