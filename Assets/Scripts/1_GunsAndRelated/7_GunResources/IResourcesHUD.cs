@@ -36,13 +36,19 @@ public class IResourcesHUD : MonoBehaviour {
 
     protected void ProcessAllResources(ProcessResource resourceFunct)
     {
-        foreach (IResource resource in m_pThisGun.onShootResources)
+        if (m_pThisGun.onShootResources != null)
         {
-            resourceFunct(resource);
+            foreach (IResource resource in m_pThisGun.onShootResources)
+            {
+                resourceFunct(resource);
+            }
         }
-        foreach (IResource resource in m_pThisGun.onActivateResources)
+        if (m_pThisGun.onActivateResources != null)
         {
-            resourceFunct(resource);
+            foreach (IResource resource in m_pThisGun.onActivateResources)
+            {
+                resourceFunct(resource);
+            }
         }
     }
     

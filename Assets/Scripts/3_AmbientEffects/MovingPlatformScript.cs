@@ -10,7 +10,6 @@ public class MovingPlatformScript : MonoBehaviour {
 	public Vector3 newTargetPoint;
 	public float speed = 1.0f;
 	public bool reach;
-	
 
 	
 	// Use this for initialization
@@ -28,10 +27,8 @@ public class MovingPlatformScript : MonoBehaviour {
 			MoveHorizontal();
 			reach = true;
 			
-			if(activePlatform.position == pointA.position){
-				Debug.Log("entre");
+			if(activePlatform.position == pointA.position && reach)
 				ReturnHorizontal();
-			}
 			
 			
 			
@@ -54,7 +51,7 @@ public class MovingPlatformScript : MonoBehaviour {
 	
 	private void ReturnHorizontal(){
 		
-		activePlatform.position = Vector3.Slerp(activePlatform.position, pointB.position, Time.deltaTime * speed);
+		activePlatform.position = Vector3.MoveTowards(activePlatform.position, pointB.position, Time.deltaTime * speed);
 		
 	}
 }

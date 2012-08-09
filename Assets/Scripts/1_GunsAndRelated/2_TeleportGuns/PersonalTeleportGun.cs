@@ -22,8 +22,8 @@ public class PersonalTeleportGun : GenericTeleportGun
         CharacterController pCharacterController = m_pPlayer.gameObject.GetComponent<CharacterController>();
 
         // Setup the gun values
-        m_ObjectOffsets = new Vector3(pCharacterController.radius * m_pPlayer.lossyScale.x, pCharacterController.height * m_pPlayer.lossyScale.y, pCharacterController.radius * m_pPlayer.lossyScale.z);
-        m_ObjectOffsetsWeight = new Vector3(1.01f, 0.51f, 1.01f);
+        m_ObjectOffsets = new Vector3(pCharacterController.radius * m_pPlayer.lossyScale.x * 2, pCharacterController.height * m_pPlayer.lossyScale.y, pCharacterController.radius * m_pPlayer.lossyScale.z * 2);
+        m_ObjectOffsetsWeight = new Vector3(1.13f, 0.53f, 1.13f);
 
         return true;
     }

@@ -5,6 +5,8 @@ public class PlatformBehavior : MonoBehaviour {
 
     // Platform Life Cooldown in seconds
     public float m_Lifespawn = 10;
+    float m_InternalLifespan;
+    bool m_bActive = false;
 
     // Objects to ignore
     LayerMask m_LayersToIgnore = 0;
@@ -25,7 +27,13 @@ public class PlatformBehavior : MonoBehaviour {
     public void Activate(bool attach)
     {
         rigidbody.isKinematic = attach; // set as kinematic
-        StartCoroutine(StartCooldown());
+        m_InternalLifespan = m_Lifespawn;
+
+        if (!m_bActive)
+        {
+            m_bActive = true;
+            StartCoroutine(StartCooldown());
+        }
     }
 
     void OnCollision(Collision other)
@@ -56,8 +64,14 @@ public class PlatformBehavior : MonoBehaviour {
         {
             yield return new WaitForFixedUpdate();
         }
+
         // Activate jump system
-        yield return new WaitForSeconds(m_Lifespawn);
+        while (m_InternalLifespan > 0)
+        {
+            m_InternalLifespan -= Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        m_bActive = false;
         transform.position = m_HidePosition; // Hide
         yield return 0;
     }

@@ -15,7 +15,7 @@ public class CetripetalMovement : BaseLinearMovement
 
     protected override void HandleGeneric(GameObject genericObject, float p)
     {
-        if (genericObject.rigidbody != null)
+        if (genericObject.rigidbody != null && !genericObject.rigidbody.isKinematic)
         {
             Vector3 dir = Vector3.Normalize(transform.position - genericObject.transform.position);
             genericObject.rigidbody.velocity = genericObject.rigidbody.velocity + m_ForceStrenght * dir * p;
