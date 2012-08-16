@@ -9,6 +9,7 @@ public class SetRespawn : MonoBehaviour {
 		//RespawnPointScript playerscript;
 		playerscript = GetComponent<RespawnPointScript>();
 		
+		
 	
 	}
 	

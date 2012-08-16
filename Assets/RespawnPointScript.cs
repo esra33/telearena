@@ -16,6 +16,7 @@ public class RespawnPointScript : MonoBehaviour {
 	void Update () {
 		if(respawn){
 			transform.position = respawnPoint.position;
+			respawn = false;
 			
 		}
 	
