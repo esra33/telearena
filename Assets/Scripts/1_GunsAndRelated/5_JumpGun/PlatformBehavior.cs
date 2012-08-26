@@ -36,25 +36,23 @@ public class PlatformBehavior : MonoBehaviour {
         }
     }
 
-    void OnCollision(Collision other)
+    void OnCollisionEnter(Collision other)
     {
        if (!rigidbody.isKinematic)
        {
-           float currAngle = 90;
-           float evalAngle;
+           Vector3 currNormal = Vector3.zero;
+           Vector3 currPos = Vector3.zero;
 
            foreach (ContactPoint cp in other.contacts)
            {
-               // The mask doesn't come inverted so only accept if the mask fails
-               evalAngle = Vector3.Angle(Vector3.Normalize(cp.point - transform.position), rigidbody.velocity.normalized);
-               if (((1 << cp.otherCollider.gameObject.layer) & m_LayersToIgnore.value) == 0 && evalAngle < currAngle)
-               {
-                   currAngle = evalAngle;
-                   transform.position = cp.point;
-                   transform.up = cp.normal;
-                   rigidbody.isKinematic = true;
-               }
+               currPos += cp.point;
+               currNormal += cp.normal;
            }
+
+           transform.up = currNormal / other.contacts.Length;
+           transform.position = currPos / other.contacts.Length + Vector3.up * transform.lossyScale.y;
+
+           rigidbody.isKinematic = true;
        }
     }
 
