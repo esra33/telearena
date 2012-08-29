@@ -4,6 +4,7 @@ using System.Collections;
 public class SetRespawn : MonoBehaviour {
 	
 	public RespawnPointScript playerscript;
+	public int respawnIdentifier;
 	// Use this for initialization
 	void Start () {
 		//RespawnPointScript playerscript;
