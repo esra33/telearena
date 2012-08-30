@@ -9,6 +9,8 @@ public class RespawnPointScript : MonoBehaviour {
 	public List<Transform> respawnPoints;
 	public bool respawn;
 	public SetRespawn respawnPointScript;
+	public HealManager HealthScript;
+	
 	//public Transform respawnPoint;
 	
 
@@ -16,6 +18,7 @@ public class RespawnPointScript : MonoBehaviour {
 	void Start () {
 		//respawnPoints = new List<Transform>();
 		respawnPointScript = GetComponent<SetRespawn>();
+		HealthScript = GetComponent<HealManager>();
 	
 	}
 	
@@ -26,6 +29,13 @@ public class RespawnPointScript : MonoBehaviour {
 			respawn = false;
 			
 		}
+		
+		if(HealthScript.currentHealth <= 0){
+			transform.position = respawnPoints[0].position;
+			HealthScript.currentHealth = HealthScript.maxHealth;
+		}
+		
+		
 	
 	}
 	

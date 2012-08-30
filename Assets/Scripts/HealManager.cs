@@ -12,10 +12,11 @@ public class HealManager : MonoBehaviour {
 	public float healthRegenRate = 0.1f;
 	public float currentHealth = 100;
 	public bool intrigger = false;
-	
+	public SetRespawn respawnPointScript;
 
 	// Use this for initialization
 	void Start () {
+		
 	
 	}
 	
@@ -37,7 +38,8 @@ public class HealManager : MonoBehaviour {
 		currentHealth = currentHealth - damage;
 		Debug.Log("healt" + currentHealth);
 		if (currentHealth <= 0){
-			Destroy(gameObject);	
+			//Destroy(gameObject);	
+			//transform.position = respawnPoints[0].position;
 		}
 		
 	}
