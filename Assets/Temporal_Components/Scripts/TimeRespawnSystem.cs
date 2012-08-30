@@ -34,7 +34,9 @@ public class TimeRespawnSystem : MonoBehaviour {
 
     void OnGUI()
     {
+        GUILayout.BeginArea(new Rect(Screen.width * 0.9f, 15, Screen.width * 0.1f, 45));
         GUILayout.Label("Time: " + ((int)m_CurrentTime/60) + ":" + ((int)m_CurrentTime%60));
+        GUILayout.EndArea();
     }
 	
 	// Update is called once per frame
