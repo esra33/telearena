@@ -6,7 +6,7 @@ public class RespawnPointScript : MonoBehaviour {
 	
 	
 	//public Transform[] respawnPoint = new Transform[10]; // 
-	public List<Transform> respawnPoints;
+	public Transform respawnPoints;
 	public bool respawn;
 	public SetRespawn respawnPointScript;
 	public HealManager HealthScript;
@@ -25,13 +25,13 @@ public class RespawnPointScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(respawn){
-			transform.position = respawnPoints[0].position;
+			transform.position = respawnPoints.position;
 			respawn = false;
 			
 		}
 		
 		if(HealthScript.currentHealth <= 0){
-			transform.position = respawnPoints[0].position;
+			transform.position = respawnPoints.position;
 			HealthScript.currentHealth = HealthScript.maxHealth;
 		}
 		
@@ -46,7 +46,7 @@ public class RespawnPointScript : MonoBehaviour {
 	
 	public void setRespawnPoint(Transform respawnPoint){
 	
-		respawnPoints[0] = respawnPoint;
+		respawnPoints = respawnPoint;
 		
 	}
 	
