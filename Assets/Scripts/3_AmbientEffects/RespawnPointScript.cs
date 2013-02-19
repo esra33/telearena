@@ -10,7 +10,7 @@ public class RespawnPointScript : MonoBehaviour {
 	public bool respawn;
 	public SetRespawn respawnPointScript;
 	public HealManager HealthScript;
-	
+
 	//public Transform respawnPoint;
 	
 
@@ -34,9 +34,6 @@ public class RespawnPointScript : MonoBehaviour {
 			transform.position = respawnPoints.position;
 			HealthScript.currentHealth = HealthScript.maxHealth;
 		}
-		
-		
-	
 	}
 	
 	public void setRespawn(){
