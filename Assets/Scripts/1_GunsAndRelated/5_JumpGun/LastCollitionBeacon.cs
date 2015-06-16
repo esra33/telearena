@@ -28,7 +28,7 @@ public class LastCollitionBeacon : MonoBehaviour {
         foreach(ContactPoint cp in other.contacts)
         {
             // The mask doesn't come inverted
-            evalAngle = Vector3.Angle(Vector3.Normalize(cp.point - transform.position), rigidbody.velocity.normalized);
+            evalAngle = Vector3.Angle(Vector3.Normalize(cp.point - transform.position), GetComponent<Rigidbody>().velocity.normalized);
             if ((( 1 << cp.otherCollider.gameObject.layer) & m_LayersToIgnore.value) == 0 && evalAngle < currAngle)
             {
                 m_bSuccess = true;

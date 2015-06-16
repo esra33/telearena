@@ -29,7 +29,7 @@ public class IResourcesHUD : MonoBehaviour {
 
     bool ProcessComponent()
     {
-        return m_pThisGun != null && transform.parent.renderer.enabled;
+        return m_pThisGun != null && transform.parent.GetComponent<Renderer>().enabled;
     }
 
     protected delegate void ProcessResource(IResource resource);

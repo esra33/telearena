@@ -16,7 +16,7 @@ public class TargetAlineation : MonoBehaviour {
 
     void Start()
     {
-        m_MyMaterial = (Material)Instantiate(renderer.material);
+        m_MyMaterial = (Material)Instantiate(GetComponent<Renderer>().material);
 
         Vector2 texScale = new Vector2(1 / m_Size[0], 1 / m_Size[1]);
         Vector2 texOffset = new Vector2(m_Position[0] * (1 / m_Size[0]), m_Position[1] * (1 / m_Size[1]));
@@ -27,7 +27,7 @@ public class TargetAlineation : MonoBehaviour {
         m_MyMaterial.SetTextureScale("_BumpMap", texScale);
         m_MyMaterial.SetTextureOffset("_BumpMap", texOffset);
 
-        renderer.material = m_MyMaterial;
+        GetComponent<Renderer>().material = m_MyMaterial;
     }
 
 	// Update is called once per frame

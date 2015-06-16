@@ -56,8 +56,8 @@ public class ObjectTeleportBeacon : MonoBehaviour {
         m_pEncapsulatedObject = other.transform;
 
         // stop movement
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.isKinematic = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().isKinematic = true;
 
         // Set animation play true
         m_bPlayAnimation = true;
@@ -66,7 +66,7 @@ public class ObjectTeleportBeacon : MonoBehaviour {
         m_pRelatedGun.ReportCapsule(transform, m_pEncapsulatedObject);
 
         // Destroy collider
-        Destroy(transform.collider);
+        Destroy(transform.GetComponent<Collider>());
     }
 
     // Animation coroutine
@@ -74,9 +74,9 @@ public class ObjectTeleportBeacon : MonoBehaviour {
     {
         while (m_bPlayAnimation)
         {
-            renderer.materials[0].color = Color.red;
+            GetComponent<Renderer>().materials[0].color = Color.red;
             yield return new WaitForSeconds(0.5f);
-            renderer.materials[0].color = Color.blue;
+            GetComponent<Renderer>().materials[0].color = Color.blue;
             yield return new WaitForSeconds(0.5f);
         }
         yield return 0;

@@ -37,7 +37,7 @@ public class FlyingCameraBehavior : MonoBehaviour {
 
     public void SQOpen()
     {
-        guiTexture.enabled = true;
+        GetComponent<GUITexture>().enabled = true;
         m_State = VIEWPOINT_STATE.OPENING;
 
         m_LerpOrigen = transform.localScale;
@@ -97,7 +97,7 @@ public class FlyingCameraBehavior : MonoBehaviour {
             else
             {
                 m_State = VIEWPOINT_STATE.CLOSE;
-                guiTexture.enabled = false;
+                GetComponent<GUITexture>().enabled = false;
                 m_LerpOrigen = transform.localScale;
                 return;
             }

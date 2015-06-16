@@ -12,7 +12,7 @@ public class RotatorAnimation : ITrapEffect
     {
         foreach (GameObject anim in m_DoorAnimations)
         {
-            anim.animation.Play("TrapDoorAnimation1");
+            anim.GetComponent<Animation>().Play("TrapDoorAnimation1");
         }
     }
 
@@ -20,7 +20,7 @@ public class RotatorAnimation : ITrapEffect
     {
         foreach (GameObject anim in m_DoorAnimations)
         {
-            anim.animation.Play("TrapDoorAnimation2");
+            anim.GetComponent<Animation>().Play("TrapDoorAnimation2");
         }
     }
 }

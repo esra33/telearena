@@ -35,7 +35,7 @@ public class ObjectTeleportGun : GenericTeleportGun
         if (!m_pRelatedObject)
             return false;
 
-        Vector3 objectiveCollider = m_pRelatedObject.collider.bounds.size;
+        Vector3 objectiveCollider = m_pRelatedObject.GetComponent<Collider>().bounds.size;
         m_ObjectOffsets = new Vector3(objectiveCollider.x, objectiveCollider.y, objectiveCollider.z);
         m_ObjectOffsetsWeight = new Vector3(0.51f, 0.51f, 0.51f);
         return true;

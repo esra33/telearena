@@ -14,10 +14,10 @@ public class GunManager : MonoBehaviour {
 	    
         for(int con = 0; con < m_lGuns.Count; con++)
         {
-            m_lGuns[con].renderer.enabled = false;
+            m_lGuns[con].GetComponent<Renderer>().enabled = false;
         }
 
-        m_lGuns[m_CurrentGunId].renderer.enabled = true;
+        m_lGuns[m_CurrentGunId].GetComponent<Renderer>().enabled = true;
 
 	}
 
@@ -31,9 +31,9 @@ public class GunManager : MonoBehaviour {
             if (Input.GetKeyUp(m_vCodes[con]))
             {
                 m_lGuns[m_CurrentGunId].BroadcastMessage("OnWeaponChange", WEAPON_SWITCH.DEACTIVATING, SendMessageOptions.DontRequireReceiver);
-                m_lGuns[m_CurrentGunId].renderer.enabled = false;
+                m_lGuns[m_CurrentGunId].GetComponent<Renderer>().enabled = false;
                 m_CurrentGunId = con;
-                m_lGuns[m_CurrentGunId].renderer.enabled = true;
+                m_lGuns[m_CurrentGunId].GetComponent<Renderer>().enabled = true;
                 m_lGuns[m_CurrentGunId].BroadcastMessage("OnWeaponChange", WEAPON_SWITCH.ACTIVATING, SendMessageOptions.DontRequireReceiver);
                 break;
             }

@@ -8,9 +8,6 @@ public class PlatformBehavior : MonoBehaviour {
     float m_InternalLifespan;
     bool m_bActive = false;
 
-    // Objects to ignore
-    LayerMask m_LayersToIgnore = 0;
-    
     // Hideout position
     Vector3 m_HidePosition;
 
@@ -19,14 +16,9 @@ public class PlatformBehavior : MonoBehaviour {
         m_HidePosition = transform.position;
     }
 
-    public void SetLayersToIgnore(LayerMask mask)
-    {
-        m_LayersToIgnore = mask;
-    }
-
     public void Activate(bool attach)
     {
-        rigidbody.isKinematic = attach; // set as kinematic
+        GetComponent<Rigidbody>().isKinematic = attach; // set as kinematic
         m_InternalLifespan = m_Lifespawn;
 
         if (!m_bActive)
@@ -38,7 +30,7 @@ public class PlatformBehavior : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-       if (!rigidbody.isKinematic)
+       if (!GetComponent<Rigidbody>().isKinematic)
        {
            Vector3 currNormal = Vector3.zero;
            Vector3 currPos = Vector3.zero;
@@ -52,13 +44,13 @@ public class PlatformBehavior : MonoBehaviour {
            transform.up = currNormal / other.contacts.Length;
            transform.position = currPos / other.contacts.Length + Vector3.up * transform.lossyScale.y;
 
-           rigidbody.isKinematic = true;
+           GetComponent<Rigidbody>().isKinematic = true;
        }
     }
 
     IEnumerator StartCooldown()
     {
-        while (!rigidbody.isKinematic)
+        while (!GetComponent<Rigidbody>().isKinematic)
         {
             yield return new WaitForFixedUpdate();
         }

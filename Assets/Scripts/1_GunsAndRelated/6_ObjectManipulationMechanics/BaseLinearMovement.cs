@@ -41,9 +41,9 @@ public class BaseLinearMovement : MonoBehaviour {
 
     protected virtual void HandleGeneric(GameObject genericObject, float p)
     {
-        if(genericObject.rigidbody != null)
+        if(genericObject.GetComponent<Rigidbody>() != null)
         {
-            genericObject.rigidbody.velocity = genericObject.rigidbody.velocity + m_ForceStrenght * transform.up * p;
+            genericObject.GetComponent<Rigidbody>().velocity = genericObject.GetComponent<Rigidbody>().velocity + m_ForceStrenght * transform.up * p;
         }
     }
 

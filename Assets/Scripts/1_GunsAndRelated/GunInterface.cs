@@ -153,7 +153,7 @@ public class GunInterface : MonoBehaviour
             Destroy(m_pCurrentShoot.gameObject);
 
         m_pCurrentShoot = (Transform)Instantiate(m_pBaseShoot, transform.position, Quaternion.identity);
-        m_pCurrentShoot.rigidbody.velocity = transform.forward * m_BaseForce;
+        m_pCurrentShoot.GetComponent<Rigidbody>().velocity = transform.forward * m_BaseForce;
         SpecialShoot();
     }
 

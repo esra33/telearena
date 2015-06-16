@@ -40,9 +40,9 @@ public class SceneChangeManager : MonoBehaviour {
         {
             ml.enabled = false;
         }
-        other.gameObject.active = false; // Deactivate Movement
-        Screen.lockCursor = false;
-        Screen.showCursor = true;
+        other.gameObject.SetActive(false); // Deactivate Movement
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameObject.SendMessage("EndStateReached", SendMessageOptions.DontRequireReceiver);
     }
 }

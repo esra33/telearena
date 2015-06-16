@@ -46,7 +46,7 @@ public class JumpPlatformGun : GenericTeleportGun{
     protected override bool InternalSetup()
     {
         // Get the original disposition values, otherwise the values are changed when reordering the normal
-        Vector3 objectiveCollider = m_pCurrentPlatformGO.collider.bounds.size;
+        Vector3 objectiveCollider = m_pCurrentPlatformGO.GetComponent<Collider>().bounds.size;
         m_baseOffsets = new float[3]{ objectiveCollider.x, objectiveCollider.y, objectiveCollider.z };
         OrganiceOffsets();
         m_pCurrentPlatformGO.layer = LayerMask.NameToLayer("Teleportable");
